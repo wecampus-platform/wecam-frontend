@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/LoginForm';
 import MyPage from './pages/MyPage';
-import Common from './layout/Common';
+import Common from './layout/CommonLayout';
 import Main from './pages/Main';
 
 function App() {

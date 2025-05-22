@@ -1,4 +1,4 @@
-import { CreateAxiosInstance } from './CreateAxiosInstance'
+import { CreateAxiosInstance } from './createAxiosInstance'
 
 //basepath 값과 token값 보내기
 
