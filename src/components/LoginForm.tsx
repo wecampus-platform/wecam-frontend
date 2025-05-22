@@ -14,7 +14,7 @@ const LoginForm: React.FC = () => {
 
     try {
       //login 정보 보내기
-      const res = await fetch('localhost:8080/public/auth/login', {
+      const res = await fetch('${process.env.REACT_APP_API_BASE_URL}/public/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const LoginForm: React.FC = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
-            placeholder="you@example.com"
+            placeholder="wecam@example.com"
             required
           />
         </div>
@@ -74,7 +74,7 @@ const LoginForm: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200"
+          className="w-full bg-point text-white py-2 rounded hover:bg-blue-600 transition duration-200"
         >
           로그인
         </button>
