@@ -9,6 +9,13 @@ export type BoxData = {
 };
 
 export interface User {
+  email: string;
+  role: 'UNAUTH' | 'GEUST_STUDENT' | 'GUEST'; 
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface UserProfile {
   username: string;
   phoneNumber: string;
   userEmail: string;

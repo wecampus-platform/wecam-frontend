@@ -1,7 +1,11 @@
 import { BoxData } from '../types/types';
-import { User } from '../types/types';
+import { UserProfile } from '../types/types';
+import type { ReactNode } from 'react';
 
-export const getMyPageBoxes = (user: User): BoxData[] => [
+export const getMyPageBoxes = (
+  user: UserProfile,
+  authLinks: { [key: string]: ReactNode }
+): BoxData[] => [
   {
     title: '기본 정보',
     contents: [
@@ -25,10 +29,10 @@ export const getMyPageBoxes = (user: User): BoxData[] => [
   {
     title: '인증 내역',
     contents: [
-      { subtitle: '소속 인증하기 (재학증명서 또는 합격증명서)', body: '' },
-      { subtitle: '학교 이메일', body: '' },
-      { subtitle: '학생회 인증하기', body: '' },
-      { subtitle: '학생회비 납부 내역', body: '' },
+      { subtitle: '소속 인증하기 (재학증명서 또는 합격증명서)', body: authLinks.organization },
+      { subtitle: '학교 이메일', body: authLinks.schoolEmail },
+      { subtitle: '학생회 인증하기', body: authLinks.studentCouncil },
+      { subtitle: '학생비 납부 내역', body: '내역 보러가기' },
     ],
   },
   {

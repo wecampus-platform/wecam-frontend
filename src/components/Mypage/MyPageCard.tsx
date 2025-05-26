@@ -1,7 +1,7 @@
-import { User } from '../types/types';
+import { UserProfile } from '../../types/types';
 
 type Props = {
-  user: User;
+  user: UserProfile;
 };
 
 function MyPageCard({ user }: Props) {

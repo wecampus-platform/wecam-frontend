@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../features/user/userSlice';
+import { User } from '../types/types';
 
-
-type Props = {
-  
-};
+type Props = {};
 
 const LoginForm = ({}: Props) => {
-const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,24 +19,34 @@ const [email, setEmail] = useState('');
     setLoading(true);
 
     try {
-      //login 정보 보내기
-      const res = await fetch('${process.env.REACT_APP_API_BASE_URL}/public/auth/login', {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/public/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       });
-      
-      //실패시
+
       if (!res.ok) {
         const errData = await res.json();
         throw new Error(errData.message || '로그인 실패');
       }
 
-      //성공시
       const data = await res.json();
-      localStorage.setItem('token', data.token); // JWT 저장
+
+      // localStorage에 토큰 저장
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+
+      // 전역 상태에 사용자 정보 저장
+      const userData: User = {
+        email: data.email,
+        role: data.role,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      };
+      dispatch(setUser(userData));
+
       alert('로그인 성공!');
     } catch (err: any) {
       setError(err.message);
@@ -51,6 +62,7 @@ const [email, setEmail] = useState('');
         className="bg-white p-8 rounded shadow-md w-full max-w-sm"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">로그인</h2>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             이메일
@@ -80,8 +92,9 @@ const [email, setEmail] = useState('');
         <button
           type="submit"
           className="w-full bg-point text-white py-2 rounded hover:bg-blue-600 transition duration-200"
+          disabled={loading}
         >
-          로그인
+          {loading ? '로그인 중...' : '로그인'}
         </button>
       </form>
     </div>

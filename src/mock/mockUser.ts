@@ -1,15 +1,15 @@
-import { User } from '../types/types'; 
+import { UserProfile } from '../types/types'; 
 
-export const mockUser: User = {
+export const mockUser: UserProfile = {
   username: '홍길동',
   phoneNumber: '010-1234-5678',
   userEmail: 'hong@example.com',
   universityId: 1,
   organizationId: 101,
   academicStatus: '재학',
-  role: 'USER',
+  role: 'UNAUTH',
   studentGrade: 3,
-  isAuthentication: true,
+  isAuthentication: false,
   isCouncilFee: false,
   nickName: '길동이',
   studentId: '202011111',
