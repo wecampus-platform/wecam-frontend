@@ -5,7 +5,7 @@ import { UserProfile } from '../types/types';
 
 //mypage 정보를 가져옴.
 //5분 동안은 재요청하지 않음.
-export function useGetUser() {
+export function useGetUserProfile() {
   return useQuery<UserProfile>({
     queryKey: ['user'],
     queryFn: getUserProfile,

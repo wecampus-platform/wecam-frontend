@@ -11,7 +11,7 @@ export const getMyPageBoxes = (
     contents: [
       { subtitle: '이름', body: user.username },
       { subtitle: '연락처', body: user.phoneNumber },
-      { subtitle: '이메일', body: user.userEmail ?? '미입력' },
+      { subtitle: '이메일', body: user.userEmail },
     ],
   },
   {

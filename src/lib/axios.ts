@@ -1,10 +1,9 @@
-import { createAxiosInstance } from './createAxiosInstance'
+import { createAxiosInstance } from './createAxiosInstance';
 
-//basepath 값과 token값 보내기
-
-//client token값
-const clientapi = createAxiosInstance('/client', () =>
-  localStorage.getItem('client-token')
+// client용 인스턴스
+export const clientapi = createAxiosInstance('/client', () =>
+  localStorage.getItem('accessToken')
 );
 
-export default clientapi;
+// public용 인스턴스
+export const publicapi = createAxiosInstance('/public');

@@ -10,7 +10,7 @@ export type BoxData = {
 
 export interface User {
   email: string;
-  role: 'UNAUTH' | 'GEUST_STUDENT' | 'GUEST'; 
+  role: 'UNAUTH' | 'GUEST_STUDENT' | 'GUEST'; 
   accessToken: string;
   refreshToken: string;
 }
@@ -22,11 +22,22 @@ export interface UserProfile {
   universityId: number;
   organizationId: number;
   academicStatus: string;
-  role: string;
+  role: 'UNAUTH' | 'GUEST_STUDENT' | 'GUEST';
   studentGrade: number;
   isAuthentication: boolean;
   isCouncilFee: boolean;
   nickName: string;
   studentId: string;
   organizationHierarchyList: string[];
+}
+
+export interface School {
+  id: number;
+  name: string;
+}
+
+export interface Organization {
+  id: number;
+  name: string;
+  level: number;
 }

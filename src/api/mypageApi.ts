@@ -1,4 +1,4 @@
-import clientapi from '../lib/axios';
+import { clientapi }from '../lib/axios';
 import { UserProfile } from '../types/types'
 
 

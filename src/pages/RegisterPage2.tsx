@@ -1,13 +1,12 @@
+// RegisterPage2.tsx
 import React from 'react';
+import RegisterForm2 from '../components/Register/RegisterForm2';
 
-type Props = {
-  
-};
-
-const RegisterPage2 = ({}: Props) => {
+const RegisterPage2 = () => {
   return (
-    <div>
-      
+    <div className="register-page">
+      <h2 className="text-center text-2xl font-bold my-4">Wecam</h2>
+      <RegisterForm2 />
     </div>
   );
 };

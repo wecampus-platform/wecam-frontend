@@ -4,15 +4,15 @@ import Box from '../components/Mypage/MyPageBox';
 import MyPageCard from '../components/Mypage/MyPageCard';
 import { getMyPageBoxes } from '../utils/getMyPageBoxes';
 import { mockUser } from '../mock/mockUser';
-import { useGetUser } from '../hooks/useUserQuery';
+import { useGetUserProfile } from '../hooks/useUserQuery';
 import { UserProfile } from '../types/types';
 
 
 const isMockMode = process.env.REACT_APP_USE_MOCK === 'true';
 
 const MyPage = () => {
-  const { data: user, isLoading, error } = useGetUser();
-  const finalUser: UserProfile | undefined = isMockMode ? mockUser : user;
+  const { data: user, isLoading, error } = useGetUserProfile();
+  const finalUser = isMockMode ? mockUser : user;
 
   if (!finalUser) return <div>사용자 정보가 없습니다.</div>;
   if (!isMockMode && isLoading) return <div>로딩중...</div>;

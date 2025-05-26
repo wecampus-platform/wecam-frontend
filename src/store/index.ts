@@ -1,10 +1,11 @@
-//Redux 저장소(store) 생성 및 타입 정의
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../features/user/userSlice';
+import registerReducer from '../features/register/registerSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    register: registerReducer,
   },
 });
 
