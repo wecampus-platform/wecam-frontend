@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
 //axiosInstace를 생성하여 url에 따라(client or public or ..) token을 전송
-export const CreateAxiosInstance = (
+export const createAxiosInstance = (
   basePath: string,
   getToken?: () => string | null
 ): AxiosInstance => {

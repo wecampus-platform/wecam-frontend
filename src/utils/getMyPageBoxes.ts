@@ -1,39 +1,41 @@
-// utils/getBoxContents.ts
 import { BoxData } from '../types/types';
+import { User } from '../types/types';
 
-export const getMyPageBoxes = (user: any): BoxData[] => [
+export const getMyPageBoxes = (user: User): BoxData[] => [
   {
     title: '기본 정보',
     contents: [
-      { subtitle: '이름', body: user.name },
-      { subtitle: '연락처', body: user.phone },
-      { subtitle: '이메일', body: user.email ?? '미입력' }
-    ]
+      { subtitle: '이름', body: user.username },
+      { subtitle: '연락처', body: user.phoneNumber },
+      { subtitle: '이메일', body: user.userEmail ?? '미입력' },
+    ],
   },
   {
     title: '소속 정보',
     contents: [
-      { subtitle: '학교', body: user.univ },
-      { subtitle: '단과대학', body: user.college },
-      { subtitle: '학과', body: user.department },
-      { subtitle: '전공', body: user.major },
-      { subtitle: '학번', body: user.studentNumber},
-      { subtitle: '학년', body: user.grade },
-      { subtitle: '학적 상태', body: user.status },
+      { subtitle: '학교', body: user.organizationHierarchyList[0] ?? '' },
+      { subtitle: '단과대학', body: user.organizationHierarchyList[1] ?? '' },
+      { subtitle: '학과', body: user.organizationHierarchyList[2] ?? '' },
+      { subtitle: '학번', body: user.studentId },
+      { subtitle: '학년', body: user.studentGrade.toString() },
+      { subtitle: '학적 상태', body: user.academicStatus },
       { subtitle: '역할', body: user.role },
-    ]
+    ],
   },
   {
     title: '인증 내역',
     contents: [
-      { subtitle: '소속 인증하기', body:'' },
-    ]
+      { subtitle: '소속 인증하기 (재학증명서 또는 합격증명서)', body: '' },
+      { subtitle: '학교 이메일', body: '' },
+      { subtitle: '학생회 인증하기', body: '' },
+      { subtitle: '학생회비 납부 내역', body: '' },
+    ],
   },
   {
     title: '계정 정보',
     contents: [
-      { subtitle: '비밀번호 변경', body: ' ' },
-      { subtitle: '로그인 기기 관리', body: ' ' },
-    ]
-  }
+      { subtitle: '비밀번호 변경', body: '' },
+      { subtitle: '로그인 기기 관리', body: '' },
+    ],
+  },
 ];

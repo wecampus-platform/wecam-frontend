@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
-const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
+
+type Props = {
+  
+};
+
+const LoginForm = ({}: Props) => {
+const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
