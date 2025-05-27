@@ -75,14 +75,14 @@ export function useRegisterForm() {
       const res = await getDuplicate('phone', phone);
       if (res.result.isDuplicate) {
         setPhoneMessage('※ 이미 가입된 계정이 있습니다.');
-        setEmailCodeInputEnabled(false);
+        setPhoneCodeInputEnabled(false);
       } else {
         setPhoneMessage('※ 인증번호가 발송되었습니다.');
-        setEmailCodeInputEnabled(true);
+        setPhoneCodeInputEnabled(true);
       }
     } catch (err) {
       setPhoneMessage('※ 전화번호 확인 중 오류가 발생했습니다.');
-      setEmailCodeInputEnabled(false);
+      setPhoneCodeInputEnabled(false);
     } finally {
       setCheckingPhone(false);
     }
