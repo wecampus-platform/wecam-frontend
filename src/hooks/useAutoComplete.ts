@@ -9,6 +9,7 @@ export function useAutoComplete<T>(
   const [selected, setSelected] = useState<T | null>(null);
   const [showList, setShowList] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const fetchOptions = async (query: string) => {
     if (disabled) return;
     setIsLoading(true);
@@ -18,9 +19,15 @@ export function useAutoComplete<T>(
   };
 
   useEffect(() => {
-    if (disabled || input.trim() === '') return;
-    fetchFn(input).then(setOptions);
-  }, [input, disabled, fetchFn]);
+    if (disabled || input.trim() === '') {
+      setOptions([]);
+      setShowList(false);
+      return;
+    }
+
+    fetchOptions(input);
+    setShowList(true);
+  }, [input, disabled]);
 
   const handleSelect = (item: T) => {
     setSelected(item);
