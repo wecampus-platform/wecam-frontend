@@ -8,6 +8,27 @@ export type BoxData = {
   contents: ContentItem[];
 };
 
+
+export interface Duplicate {
+  isSuccess: boolean;
+  code: number;
+  message: string;
+  result: {
+    isDuplicate: boolean;
+  }
+}
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  name: string;
+  phone: string;
+  schoolId: number;
+  collegeId: number;
+  departmentId: number;
+}
+
+
 export interface User {
   email: string;
   role: 'UNAUTH' | 'GUEST_STUDENT' | 'GUEST'; 
@@ -41,3 +62,17 @@ export interface Organization {
   name: string;
   level: number;
 }
+
+//공통 응답
+// interface ApiResponse<T> {
+//   isSuccess: boolean;
+//   code: number;
+//   message: string;
+//   result: T;
+// }
+
+// type EmailCheckResult = {
+//   isDuplicate: boolean;
+// };
+
+// type EmailCheckResponse = ApiResponse<EmailCheckResult>;

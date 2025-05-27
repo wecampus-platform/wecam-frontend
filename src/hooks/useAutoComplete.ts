@@ -8,6 +8,14 @@ export function useAutoComplete<T>(
   const [options, setOptions] = useState<T[]>([]);
   const [selected, setSelected] = useState<T | null>(null);
   const [showList, setShowList] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const fetchOptions = async (query: string) => {
+    if (disabled) return;
+    setIsLoading(true);
+    const data = await fetchFn(query);
+    setOptions(data);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     if (disabled || input.trim() === '') return;
@@ -30,5 +38,7 @@ export function useAutoComplete<T>(
     setShowList,
     handleSelect,
     disabled,
+    fetchOptions,
+    isLoading,
   };
 }

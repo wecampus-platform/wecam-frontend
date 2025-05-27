@@ -7,3 +7,6 @@ export const clientapi = createAxiosInstance('/client', () =>
 
 // public용 인스턴스
 export const publicapi = createAxiosInstance('/public');
+
+//email check용 인스턴스
+export const authapi = createAxiosInstance('/auth');

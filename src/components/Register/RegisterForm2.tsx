@@ -4,19 +4,36 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/index';
 import { useRegisterForm } from '../../hooks/useRegisterForm';
 
-const RegisterForm2 = () => {
+interface RegisterForm2Props {
+    onSubmit: (data: {
+        email: string;
+        password: string;
+        name: string;
+        phone: string;
+    }) => void;
+}
+
+const RegisterForm2 = ({ onSubmit }: RegisterForm2Props) => {
     const register = useSelector((state: RootState) => state.register);
     const {
-        email, setEmail, isEmailValid,
+        email, setEmail, isEmailValid, emailCodeInputEnabled,
         password, setPassword, isPasswordValid,
         confirmPassword, setConfirmPassword, isPasswordMatch,
         name, setName,
-        phone, setPhone, isPhoneValid,
-        isFormValid
+        phone, setPhone, isPhoneValid, phoneCodeInputEnabled,
+        isFormValid,
+        emailMessage, handleCheckEmail, checkingEmail,
+        phoneMessage, handleCheckPhone, checkingPhone,
     } = useRegisterForm();
 
+
+
     return (
-        <form className="max-w-md mx-auto space-y-6">
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            if (!isFormValid) return;
+            onSubmit({ email, password, name, phone });
+        }} className="max-w-md mx-auto space-y-6">
             {/* 소속 정보 */}
             <div className="block mb-1">
                 <input
@@ -34,13 +51,27 @@ const RegisterForm2 = () => {
                     <input
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
                         className="input-common flex-1"
                     />
-                    <button type="button" className="button-common button-point-outline">이메일 인증하기</button>
+                    <button
+                        type="button"
+                        onClick={handleCheckEmail}
+                        disabled={checkingEmail || !isEmailValid}
+                        className="button-common"
+                    >
+                        이메일 인증하기
+                    </button>
                 </div>
-                {!isEmailValid && email && (
+                {email && !isEmailValid && (
                     <p className="text-red-500 text-sm mt-1">※ 이메일 형식이 올바르지 않습니다.</p>
+                )}
+                {emailMessage && (
+                    <p className={`text-sm mt-1 ${emailMessage.includes('인증코드') ? 'text-green-600' : 'text-red-500'}`}>
+                        {emailMessage}
+                    </p>
                 )}
             </div>
 
@@ -48,8 +79,8 @@ const RegisterForm2 = () => {
             <div>
                 <label className="block mb-1">인증코드</label>
                 <div className="flex gap-2">
-                    <input type="text" className="input-common flex-1" />
-                    <button type="button" className="button-common button-point-outline">인증코드 확인</button>
+                    <input type="text" disabled={!emailCodeInputEnabled} className="input-common flex-1" />
+                    <button type="button" disabled={!emailCodeInputEnabled} className="button-common">인증코드 확인</button>
                 </div>
             </div>
 
@@ -99,13 +130,24 @@ const RegisterForm2 = () => {
                     <input
                         type="text"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                        onChange={(e) => {
+                            setPhone(e.target.value.replace(/[^0-9]/g, ''));
+                        }}
                         className="input-common flex-1"
                     />
-                    <button type="button" className="button-common button-point-outline">본인인증하기</button>
+                    <button
+                        type="button"
+                        onClick={handleCheckPhone}
+                        disabled={checkingPhone || !isPhoneValid}
+                        className="button-common"
+                    >
+                        본인인증하기
+                    </button>
                 </div>
-                {!isPhoneValid && phone && (
-                    <p className="text-red-500 text-sm mt-1">※ 올바른 전화번호를 입력하세요.</p>
+                {phoneMessage && (
+                    <p className={`text-sm mt-1 ${phoneMessage.includes('인증번호') ? 'text-green-600' : 'text-red-500'}`}>
+                        {phoneMessage}
+                    </p>
                 )}
             </div>
 
@@ -113,8 +155,8 @@ const RegisterForm2 = () => {
             <div>
                 <label className="block mb-1">인증번호</label>
                 <div className="flex gap-2">
-                    <input type="text" className="input-common flex-1" maxLength={6} />
-                    <button type="button" className="button-common button-point-outline">인증번호 확인</button>
+                    <input type="text" disabled={!phoneCodeInputEnabled} className="input-common flex-1" maxLength={6} />
+                    <button type="button" disabled={!phoneCodeInputEnabled} className="button-common">인증번호 확인</button>
                 </div>
             </div>
 

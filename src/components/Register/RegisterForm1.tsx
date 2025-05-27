@@ -38,9 +38,9 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <AutoCompleteInput label="학교" {...school} />
-      <AutoCompleteInput label="단과대학" {...college} />
-      <AutoCompleteInput label="학부" {...department} />
+      <AutoCompleteInput label="학교" {...school} onFocusTrigger={() => school.fetchOptions('')}/>
+      <AutoCompleteInput label="단과대학" {...college} onFocusTrigger={() => college.fetchOptions('')}/>
+      <AutoCompleteInput label="학부" {...department} onFocusTrigger={() => department.fetchOptions('')}/>
 
       <button
         type="submit"
