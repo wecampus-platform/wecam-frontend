@@ -20,7 +20,7 @@ export const searchSchools = async (keyword: string): Promise<School[]> => {
   return res.data.filter((s) => s.name.includes(keyword));
 };
 
-export const searchColleges = async (schoolId: number, keyword: string): Promise<Organization[]> => {
+export const searchColleges = async (schoolId: number, keyword: string, level: number): Promise<Organization[]> => {
   if (isMockMode) {
     return new Promise((resolve) =>
       setTimeout(() => {
@@ -32,11 +32,15 @@ export const searchColleges = async (schoolId: number, keyword: string): Promise
     );
   }
 
-  const res = await publicapi.get<Organization[]>(`/schools/${schoolId}/organizations`);
-  return res.data.filter((c) => c.name.includes(keyword));
+  const res = await publicapi.get<Organization[]>(
+    `/schools/${schoolId}/organizations`,
+    {
+      params: { level } 
+    }
+  );  return res.data.filter((c) => c.name.includes(keyword));
 };
 
-export const searchDepartments = async (collegeId: number, keyword: string): Promise<Organization[]> => {
+export const searchDepartments = async (collegeId: number, keyword: string, level: number): Promise<Organization[]> => {
   if (isMockMode) {
     return new Promise((resolve) =>
       setTimeout(() => {
@@ -48,6 +52,10 @@ export const searchDepartments = async (collegeId: number, keyword: string): Pro
     );
   }
 
-  const res = await publicapi.get<Organization[]>(`/organizations/${collegeId}/children`);
-  return res.data.filter((d) => d.name.includes(keyword));
+  const res = await publicapi.get<Organization[]>(
+    `/organizations/${collegeId}/children`,
+    {
+      params: { level }
+    }
+  );  return res.data.filter((d) => d.name.includes(keyword));
 };

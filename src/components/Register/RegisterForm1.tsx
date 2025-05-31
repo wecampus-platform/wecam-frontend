@@ -19,11 +19,11 @@ interface RegisterFormProps {
 const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
   const school = useAutoComplete<School>(searchSchools);
   const college = useAutoComplete<Organization>(
-    (q) => searchColleges(school.selected?.id ?? 0, q),
+    (q) => searchColleges(school.selected?.id ?? 0, q ,0),
     !school.selected
   );
   const department = useAutoComplete<Organization>(
-    (q) => searchDepartments(college.selected?.id ?? 0, q),
+    (q) => searchDepartments(college.selected?.id ?? 0 ,q , college.selected?.level ?? 1),
     !college.selected
   );
 

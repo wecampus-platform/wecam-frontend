@@ -21,7 +21,7 @@ export const getMyPageBoxes = (
       { subtitle: '단과대학', body: user.organizationHierarchyList[1] ?? '' },
       { subtitle: '학과', body: user.organizationHierarchyList[2] ?? '' },
       { subtitle: '학번', body: user.studentId },
-      { subtitle: '학년', body: user.studentGrade.toString() },
+      { subtitle: '학년', body: user.studentGrade },
       { subtitle: '학적 상태', body: user.academicStatus },
       { subtitle: '역할', body: user.role },
     ],
